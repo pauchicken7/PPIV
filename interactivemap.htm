@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Full Screen Map of the Philippines</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <style>
+        body, html {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+        #map {
+            width: 100%;
+            height: 100%;
+        }
+    </style>
+</head>
+<body>
+    <div id="map"></div>
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <script>
+        var map = L.map('map').setView([12.8797, 121], 6); // Set the view to the Philippines with a suitable zoom level
+
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 19,
+            attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        }).addTo(map);
+
+        // Define the locations with coordinates and content for popups
+        var markers = [
+            {coords: [18.3545, 121.0851], content: 'Apayao - <a href="https://youtu.be/49J2wci_U_A?si=46ZULNZLTeyizRhH">Visit Apayao</a>'},
+            {coords: [17.4705, 121.4659], content: 'Kalinga - <a href="https://youtu.be/j5xECVMgxm0?si=GhwdbDEOXyVWQYF5">Visit Kalinga</a>'},
+            {coords: [20.4486, 121.9708], content: 'Batanes - <a href="https://youtu.be/jn9zFuy3Rf8?si=YJlg9gBp9IGROiuw">Visit Batanes</a>'},
+            {coords: [18.5449, 122.2633], content: 'Cagayan (Palaui Island) - <a href="https://youtu.be/I58ensoOk64?si=lKZEGAQ2nrg0j_YK">Visit Palaui Island</a>'},
+            {coords: [18.5616, 120.7872], content: 'Ilocos Norte (Pagudpud) - <a href="https://youtu.be/PStK01wXtM0?si=KXpNN-L8Rsug6dxX">Visit Pagudpud</a>'},
+            {coords: [7.7511, 122.7469], content: 'Zamboanga Sibugay - <a href="https://youtu.be/FrkBCR4zalU?si=oTcYEII0seK-n22-">Visit Zamboanga Sibugay</a>'},
+            {coords: [5.4035, 125.4637], content: 'Sarangani - <a href="https://youtu.be/q6SOk4NUx-c?si=B-DCA8DG5j5atNtP">Visit Sarangani</a>'},
+            {coords: [10.2447, 125.5796], content: 'Dinagat Islands - <a href="https://youtu.be/Hw66mhlPveU?si=Lk5vin6iFWUIUL2N">Visit Dinagat Islands</a>'},
+            {coords: [8.4740, 126.3457], content: 'Surigao del Sur (Hinatuan Enchanted River) - <a href="https://youtu.be/YuSAnPSOsZU?si=G1KEWdXuRBO7DRC2">Visit Hinatuan Enchanted River</a>'},
+            {coords: [6.4416, 124.2586], content: 'Sultan Kudarat - <a href="https://youtu.be/F2xlMGAz_eI?si=ElyckPze-kea2AwU">Visit Sultan Kudarat</a>'},
+            {coords: [11.0367, 125.7276], content: 'Eastern Samar (Calicoan Island) - <a href="https://youtu.be/YIRgSGBkUA4?si=vbKWKqK7AgomNElK">Visit Calicoan Island</a>'},
+            {coords: [10.2729, 124.9860], content: 'Leyte (Cuatro Islas) - <a href="https://youtu.be/DvEi0rTK_MM?si=Q2lEtUGpZJHA5FsS">Visit Cuatro Islas</a>'},
+            {coords: [13.7833, 124.5000], content: 'Catanduanes - <a href="https://youtu.be/XYtJFVkYk-E?si=daDZfegyvq69Bbnc">Visit Catanduanes</a>'},
+            {coords: [11.6316, 125.0536], content: 'Samar (Calbiga Caves) - <a href="https://youtu.be/Fa2r-T1XyoQ?si=iOaGgvTSw4Sbqc7n">Visit Calbiga Caves</a>'},
+            {coords: [12.3072, 123.6794], content: 'Masbate (Ticao Island) - <a href="https://youtu.be/HxmF0TVLgso?si=udZmwJV4Gee6v4Gc">Visit Ticao Island</a>'},
+            {coords: [12.6731, 120.9352], content: 'Occidental Mindoro (Apo Reef) - <a href="https://youtu.be/mh6PWduO3pU?si=IIft5KMLTSn69GG_">Visit Apo Reef</a>'},
+            {coords: [10.4042, 119.1643], content: 'Palawan (Port Barton) - <a href="https://youtu.be/XQot00YSFsY?si=1MTABczuhkWLpvqm">Visit Port Barton</a>'},
+            {coords: [11.3333, 122.0000], content: 'Antique - <a href="https://youtu.be/4WxbPGyuHy8?si=P565AHBAmUmeNd6P">Visit Antique</a>'},
+            {coords: [12.2989, 122.6419], content: 'Romblon (Cresta de Gallo) - <a href="https://youtu.be/WGdaQ6xAfOQ?si=IDKzmRPcgyF1z8qp">Visit Cresta de Gallo</a>'},
+            {coords: [7.9986, 117.0627], content: 'Palawan (Balabac) - <a href="https://youtu.be/XXbBbwNdszc?si=1bpisRfKhkINRjd0">Visit Balabac</a>'}
+            // Add more markers here
+        ];
+
+        // Add markers to the map for each location
+        markers.forEach(function(marker) {
+            L.marker(marker.coords).addTo(map)
+                .bindPopup(marker.content);
+        });
+    </script>
+</body>
+</html>
